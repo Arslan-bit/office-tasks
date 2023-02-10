@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+            <form id="Register" class="inputs-group" method="POST">
+                {% csrf_token %}
+                <input type="text" class="input-fleld" placeholder="Frst name" required name="fname">
+                <input type="text" class="input-fleld" placeholder="Last name" required name="lname">
+                <input type="email" class="input-fleld" placeholder="Email" required name="email">
+                <input type="text" class="input-fleld" placeholder="User Name" required name="user">
+                <input type="text" class="input-fleld" placeholder="password" required name="password">
+                <input type="password" class="input-fleld" placeholder="Cinform Password" required name="apassword">
+                <br><br>
+                <input  type="submit" class="submit-btn" value="Register" name="signup">
+            </form>
+
+            <hr>
+            
+            <a href="{% url 'login' %}" type="button" class="btn btn-outline-primary fw-500 rounded "> Log in </a>
+   
+<script>
+
+    let login = document.getElementById('Login')
+    let register = document.getElementById('Register')
+    let btn = document.getElementById('btn')
+      
+         function Register(){
+            login.style.left = '-400px'
+            register.style.left = '50px'
+            btn.style.left = '110px'
+         }
+         function Login(){
+            login.style.left = '50px'
+            register.style.left = '450px'
+            btn.style.left = '0px'
+         }
+</script>
+</body>
+</html>

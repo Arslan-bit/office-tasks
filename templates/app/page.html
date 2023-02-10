@@ -1,0 +1,70 @@
+
+{% extends 'base.html' %}
+{% block title %}Page{% endblock title %}
+{% load static %}
+{% block content %}
+<section>
+
+
+<div class = 'cards-products' styel="">
+        {% csrf_token %}
+        {% for pro  in products  %}
+            <div class="card shadow-sm mt-5" style='margin-top: 100px; background-color:#CFF5E7;'>
+                    
+                    <div style='display:flex; justify-content:space-between' >                    
+                            <img style='margin:20px;border-radius:15px;box-shadow: rgba(0, 0, 0, 0.45) 0px 25px 20px -20px;' width='200' height='200' src="{{pro.image.url}}" alt="">
+
+                            <p style='width:78%;padding:40px 80px;' class="card-text">{{pro.description}}</p>
+                    </div>
+
+                <div class="card-body">
+                
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+
+
+                    <button type="button" class="btn btn-sm btn-outline-secondary">{{pro.name}}</button>
+                    
+
+                        <form action="{% url 'cart_add' id=pro.id %}" method="post">
+                            
+                            {% comment %} <input type="number" name="quantity" value="0"> {% endcomment %}
+                            {%csrf_token%}
+                            &nbsp;
+                            <button  type="submit" class="btn btn-sm btn-outline-secondary">Add Cart</button>
+                        </form>
+
+
+                        <form action="{% url 'cart_detail' %}" method="post">
+                            {%csrf_token%}
+                            &nbsp;
+                             <button  type="submit" class="btn btn-sm btn-outline-secondary">Show Carts</button>
+                        </form>
+
+                    
+                        
+
+                    </div>
+                    
+                        <div style = 'width:60%; display:flex' >
+
+                            <small class="text-muted"><p style = 'border:1px solid gray; padding:5px 20px; border-radius:5px;'>stoke:&nbsp; {{pro.stock}}</p></small>
+                            &nbsp;
+                            <small class="text-muted"><p style = 'border:1px solid gray; padding:5px 20px; border-radius:5px;'>tag:&nbsp;{{pro.tag}}</p></small>
+                            &nbsp;
+                            <small class="text-muted"><p style = 'border:1px solid gray; padding:5px 20px; border-radius:5px;'>price:&nbsp;{{pro.price}}</p></small>
+                            &nbsp;
+                            <small class="text-muted"><p style = 'border:1px solid gray; padding:5px 20px; border-radius:5px;'>product:&nbsp;{{pro.product}}</p></small>
+                        </div>
+                </div>
+                </div>
+            </div>
+            
+        {% endfor %}
+
+</div>
+</section>
+{% endblock content %}
+{% block js %}
+{% endblock js %}
+

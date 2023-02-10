@@ -1,0 +1,75 @@
+{% extends 'layouts/base.html' %}
+{% block title %}Page{% endblock title %}
+{% load static %}
+{% block content %}
+<section>
+
+
+<div class = 'cards-products' styel="">
+    
+
+        Total 
+    <br>
+
+
+    {% csrf_token %}
+    {% for key,value in request.session.cart.items %}
+                
+            
+                    <div class="card shadow-sm">
+                            <title>Placeholder</title>
+
+                            <img width='200' height='200' src="{{value.image}}" alt="">
+
+
+  
+                        <div class="card-body"> 
+                            <div style = 'display:flex;'>
+                                        <form action="{% url 'item_increment' id=key %}" method="post">
+                                        {%csrf_token%}
+                                        <button  type="submit" class="btn btn-sm btn-outline-secondary">+</button>
+                                    </form>
+
+                                    &nbsp;&nbsp;
+                                    
+                                    <form action="{% url 'item_decrement' id=key %}" method="post">
+                                        {%csrf_token%}
+                                        <button  type="submit" class="btn btn-sm btn-outline-secondary">--</button>
+                                    </form>
+                            </div>
+                        <p class="card-text"></p>
+                  
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a href='#' >{{value.name}}</a>
+                            
+                            <small class="text-muted">per price:{{value.price}} </small>
+                            <small class="text-muted">Total price:{% widthratio value.price 1 value.quantity  %}</small>
+                            <small class="text-muted">Total Carts:{{value.quantity}}</small>
+
+                            <form action="{% url 'item_clear' id=key %}" method="post">
+                                {%csrf_token%}
+                                <button  type="submit" class="btn btn-sm btn-outline-secondary">Remove</button>
+                            </form>
+                        </div>
+                    
+                        </div>
+                        {%csrf_token%}
+                        
+            
+                    </div>
+                    <hr>
+                    <form action="{% url 'cart_clear' %}" method="post">
+                        {%csrf_token%}
+                        <button  type="submit" class="btn btn-sm btn-outline-secondary">Clear All Carts </button>
+                    </form>
+
+                
+    {% endfor %}
+       
+
+</div>
+</section>
+{% endblock content %}
+{% block js %}
+{% endblock js %}
+

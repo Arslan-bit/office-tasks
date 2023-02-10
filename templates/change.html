@@ -1,0 +1,61 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="hero">
+        <div class="form-box">
+            {% for message in messages %}
+            <div class="alert alert-danger {{ message.tags }} d-flex align-items-center" role="alert" style="text-align: center;
+            color: red;
+            font-weight: 600;margin: 10px 0px;">
+                <div>
+                    {{ message }}
+                </div>
+            </div>
+            {% endfor %}
+            <div class="button-box">
+                <div id="btn"></div>
+                <button type="button" class="toggle-btn" onclick="Login()">Log In</button>
+                <button type="button" class="toggle-btn" onclick="Register()">Register</button>
+            </div>
+            <div class="social-icon">
+                <img src="{% static 'fb.png' %}" alt="">
+                <img src=" {% static 'tw.png' %}" alt="">
+                <img src="{% static 'gp.png' %}" alt="">
+            </div>
+            <form id="Login" class="inputs-group" method="POST">
+                {% csrf_token %}
+                <input type="text" class="input-fleld" placeholder="User name" required name="user">
+                <input type="password" class="input-fleld" placeholder="Old Password" required name="opas">
+                <input type="password" class="input-fleld" placeholder="New Password" required name="npas">
+                <input type="password" class="input-fleld" placeholder="Again New Password" required name="anpas">
+                       <br><br><br><br>
+                <input type="submit" class="submit-btn" value="Login "  name="Login">
+            </form>
+        </div>
+    </div>
+<script>
+
+    let login = document.getElementById('Login')
+    let register = document.getElementById('Register')
+    let btn = document.getElementById('btn')
+      
+         function Register(){
+            login.style.left = '-400px'
+            register.style.left = '50px'
+            btn.style.left = '110px'
+         }
+         function Login(){
+            login.style.left = '50px'
+            register.style.left = '450px'
+            btn.style.left = '0px'
+         }
+</script>
+</body>
+</html>

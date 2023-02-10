@@ -1,0 +1,227 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bootstrap demo</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+  <link rel="stylesheet" href=" {% static 'style.css' %} ">
+</head>
+
+<body>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" />
+
+  <!--Font awesome!-->
+  <script src="https://kit.fontawesome.com/f4e855eb8f.js" crossorigin="anonymous"></script>
+
+
+  <div class="container-fluid px-4 py-4">
+
+    <div class="input-group justify-content-between">
+      <a class="navbar-brand" href="#"> <img class="me-3 me-md-5"
+          src="https://bootstrap-ecommerce.com/bootstrap5-ecommerce/images/logo.svg"></img></a>
+
+
+      <div class="ms-md-5 mt-2 mt-md-0">
+        <a href="{% url 'shop' %}" type="button" class="btn btn-outline-primary fw-500 rounded">
+          <i class="fa-solid fa-heart me-lg-2"></i>
+          <p class="d-none d-lg-inline">Home Page</p>
+        </a>
+        <a href="{% url 'product' %}" type="button" class="btn btn-outline-primary fw-500 rounded">
+          <i class="fa-solid fa-heart me-lg-2"></i>
+          <p class="d-none d-lg-inline">Search Page</p>
+        </a>
+        
+        <a href="{% url 'signup' %}" type="button" class="btn btn-outline-primary fw-500 rounded ">
+          <i class="fa-solid fa-user me-lg-2"></i>
+          <p class="d-none d-lg-inline"> Sign in</p>
+        </a>
+        <a href="{% url 'signup' %}" type="button" class="btn btn-outline-primary fw-500 rounded">
+          <i class="fa-solid fa-user me-lg-2"></i>
+          <p class="d-none d-lg-inline">Login</p>
+        </a>
+       
+        <a type="button" class="btn btn-outline-primary fw-500 rounded ">
+          <i class="fa-solid fa-cart-shopping me-lg-2"></i>
+          <p class="d-none d-lg-inline">My Cart</p>
+        </a>
+      
+      </div>
+
+      <ul class="dropdown-menu  dropdown-menu-start">
+        <li><a class="dropdown-item" href="#">Best</a></li>
+        <li><a class="dropdown-item" href="#">Special</a></li>
+        <li><a class="dropdown-item" href="#">Latest</a></li>
+      </ul>
+    </div>
+
+
+
+
+  <!--  Navbar  -->
+  <div class="container-fluid mt-3 px-0">
+    <nav class="navbar navbar-expand-lg navbar-light">
+
+      <button class="navbar-toggler mb-2" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+        aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item ">
+            <a class="nav-link active" aria-current="page" href="#">Categories</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Hot offers</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Gift boxes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Projects</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Menu item</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Menu name</a>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown"
+              aria-expanded="false">
+              Others
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <li><a class="dropdown-item" href="#">Action</a></li>
+              <li><a class="dropdown-item" href="#">Another action</a></li>
+              <li><a class="dropdown-item" href="#">Something else here</a></li>
+            </ul>
+          </li>
+      </div>
+  </div>
+</div>
+
+
+
+   <form  action="{% url 'product' %}" class="from">
+    <div class="container my-4 mb-4">
+        <label  class="form-label">Search Your products</label><br>
+        <input type="search" placeholder="search!" class="search" name="q" />
+      </div>
+   </form>
+</div>
+       
+    
+    <div class="container my-4">
+        <div class="row g-3 d-flex justify-content-between">
+          {% for product in products %}
+
+          <div class="card" style="width: 20rem;">
+          <a href="{% url 'detail' product.slug product.id  %}">  <img class="img" src="{{product.image.url}}" width="100%" height="240px"></img></a>
+              <hr>
+            <div class="card-body">
+             <span class="d-flex justify-content-between my-2">
+              <h5 class="card-title">{{product.title}}</h5>
+              <h5 class="card-title">${{product.price}}</h5>
+             </span>
+              <p class="card-subtitle mb-2 text-muted">{{product.description}}</p>
+              <a href="#" role="button" class="btn btn-primary card-link py-2 px-4">Add to card</a>
+              <a href="#" class="btn btn-outline-primary card-link"> <i class="fa-solid fa-heart"></i></a>
+            </div>
+          </div> 
+        {% endfor %}
+       
+       </div>
+    </div>
+
+
+    <div class="py-5 px-3">
+        <div class="container py-5">
+          <h3 class="fw-bold  text-center text-md-start mb-3">Why choose Us?</h3>
+          <div class="row">
+  
+            <div class="col-lg-4 col-md-6 d-flex align-items-center">
+  
+              <div class="bg-white shadow-sm rounded-circle p-3">
+                <i class="fa-solid fa-money-bill fs-1 text-primary"></i>
+              </div>
+  
+              <div class="ms-3 mt-md-5">
+                <h6 class="h6 fw-bold">Reasonable prices</h6>
+                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do eiusmor</p>
+              </div>
+            </div>
+  
+  
+            <div class="col-lg-4 col-md-6 d-flex align-items-center">
+  
+              <div class="bg-white shadow-sm rounded-circle p-3">
+                <i class="fa-solid fa-star  fs-1 text-primary"></i>
+              </div>
+  
+              <div class="ms-3 mt-md-5">
+                <h6 class="h6 fw-bold">
+                  Best quality</h6>
+                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do eiusmor</p>
+              </div>
+            </div>
+  
+  
+            <div class=" col-lg-4 col-md-6 d-flex align-items-center">
+  
+              <div class="bg-white shadow-sm rounded-circle p-3">
+                <i class="fa-solid fa-plane  fs-1 text-primary"></i>
+              </div>
+              <div class="ms-3 mt-md-5">
+                <h6 class="h6 fw-bold">Worldwide shipping</h6>
+                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do eiusmor</p>
+              </div>
+            </div>
+  
+  
+            <div class="col-lg-4 col-md-6 d-flex align-items-center">
+  
+              <div class="bg-white shadow-sm rounded-circle p-3">
+                <i class="fa-solid fa-users  fs-1 text-primary"></i>
+              </div>
+              <div class="ms-3 mt-md-5">
+                <h6 class="h6 fw-bold">Customer satisfaction</h6>
+                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do eiusmor</p>
+              </div>
+            </div>
+  
+  
+            <div class="col-lg-4 col-md-6 d-flex align-items-center">
+  
+              <div class="bg-white shadow-sm rounded-circle p-3">
+                <i class="fa-solid fa-thumbs-up  fs-1 text-primary"></i>
+              </div>
+              <div class="ms-3 mt-md-5">
+                <h6 class="h6 fw-bold">Happy customers</h6>
+                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do eiusmor</p>
+              </div>
+            </div>
+  
+            <div class="col-lg-4 col-md-6 d-flex align-items-center">
+  
+              <div class="bg-white shadow-sm rounded-circle p-3">
+                <i class="fa-solid fa-box-open fs-1 text-primary"></i>
+              </div>
+              <div class="ms-3 mt-md-5">
+                <h6 class="h6 fw-bold">Thousand items</h6>
+                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit sed do eiusmor</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      {% include "footer.html" %}
